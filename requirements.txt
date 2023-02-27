@@ -6,5 +6,4 @@ black
 fire==0.5.0
 fastapi
 uvicorn
-requests
-json
+
