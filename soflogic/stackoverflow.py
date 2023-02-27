@@ -9,30 +9,54 @@ except: # For Python 3
     from urllib.parse import urlencode
 
 
-url = 'https://api.stackexchange.com/2.3/search?order=desc&sort=activity&tagged=rust&site=stackoverflow'
+tagged_api = 'https://api.stackexchange.com/2.3/search?order=desc&sort=activity&tagged=rust&site=stackoverflow'
+users_api = 'https://api.stackexchange.com/2.3/users?order=desc&sort=reputation&site=stackoverflow'
 
 
-def search_tagged_questions(name):
+def search_tagged_questions(tagged):
     """Type any tagged name (python, java, rust, etc) and get all related question on stackoverflow"""
 
-    url_parts = urlparse(url)
-    query = f'order=desc&sort=activity&tagged={name}&site=stackoverflow'
+    url_parts = urlparse(tagged_api)
+    query = f'order=desc&sort=activity&tagged={tagged}&site=stackoverflow'
     join_url = url_parts._replace(query=query).geturl()
     return join_url
 
 
-def get_questions(name, answer=0):
-    """Get links for any unanswered stackoverflow questions"""
+def get_questions(tagged):
+    """Get links for any stackoverflow questions by their tagged name (python, java, rust, etc) """
 
-    response = requests.get(search_tagged_questions(name))
+    response = requests.get(search_tagged_questions(tagged))
     for data in response.json()['items']:
-        if data['answer_count'] == answer:
+        if data['is_answered'] is True:
             print(data['title'])
-            print(data['link'], '\n')
+            print(data['link'])
+            print(f"Question is answered: {data['is_answered']}", '\n')
 
-        elif data['answer_count'] == answer & data['is_answered'] is True:
+        elif data['is_answered'] is False:
             print(data['title'])
             print(data['link'])
             print(f"Question is answered: {data['is_answered']}", '\n')
     return data
-  
+
+
+def search_users(name):
+    """"Fetech all users on StackOverFlow by first/last name"""
+
+    url_parts = urlparse(users_api)
+    query=f'order=desc&sort=reputation&inname={name}&site=stackoverflow'
+    join_url = url_parts._replace(query=query).geturl()
+    return join_url
+
+
+
+def fetchUsers(name):
+    """Fetch all users from StackOverflow by their first/last names"""
+
+    response = requests.get(search_users(name))
+    for data in response.json()['items']:
+        if data['display_name'] == name:
+            print(f"Username: {data['display_name']}")
+            #print(f"location: {data['location']}")
+            print(f"Badge Count: {data['badge_counts']}")
+        else:
+            print('data not available')
