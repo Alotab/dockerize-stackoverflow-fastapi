@@ -1,14 +1,6 @@
 import requests
 from urllib.parse import urlparse
 
-
-# try:
-#     from urllib.parse import urlparse
-# except:  # For Python 3
-#     import urllib.parse as urlparse
-#     from urllib.parse import urlencode
-
-
 tagged_api = "https://api.stackexchange.com/2.3/search?order=desc&sort=activity&tagged=rust&site=stackoverflow"
 users_api = "https://api.stackexchange.com/2.3/users?order=desc&sort=reputation&site=stackoverflow"
 
@@ -57,7 +49,6 @@ def fetch_users(name):
     for data in response.json()["items"]:
         if data["display_name"] == name:
             print(f"Username: {data['display_name']}")
-            # print(f"location: {data['location']}")
             print(f"Badge Count: {data['badge_counts']}")
             print(f"website links: {data['link']}", "\n")
         else:

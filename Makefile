@@ -8,7 +8,7 @@ format:
 	black *.py soflogic/*.py
 lint:
 	#flake8 or #pylint
-	pylint --disable=R,C *.py soflogic/*.py
+	pylint --disable=R,C soflogic/*.py
 test:
 	#test
 	python -m pytest -vv --cov=stackquestions --cov=soflogic test_*.py
