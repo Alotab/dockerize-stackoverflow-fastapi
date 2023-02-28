@@ -6,7 +6,7 @@ test:
 	python -m pytest -vv --cov=stackquestions --cov=soflogic test_stackoverflow.py
 
 lint:
-	pylint --disable=R,C *.py soflogic/*.py
+	pylint --disable=R,C soflogic/*.py
 
 format:
 	black *.py soflogic 
