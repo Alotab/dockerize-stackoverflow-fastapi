@@ -16,3 +16,8 @@ This is a python application that leverages on Stackoverflow api to get all ques
 * Make the file executable `chmod +x stackquestions.py`
 * Read the documentation `./stackquestions.py --help`
 * Run the file ` ./stackquestions.py --name 'python' `
+
+## Move to Production
+* Build Dockerfile to containerize it
+* Build Web app `FastAPI`
+* Push to Cloud `AWS Cloud 9` -  `App runner`

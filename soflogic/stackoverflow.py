@@ -33,7 +33,7 @@ def get_questions(tagged):
 
 
 def search_users(name):
-    """ "Fetech all users on StackOverFlow by first/last name"""
+    """Fetech all users on StackOverFlow by first/last name"""
 
     url_parts = urlparse(users_api)
     query = f"order=desc&sort=reputation&inname={name}&site=stackoverflow"
